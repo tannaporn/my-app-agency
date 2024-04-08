@@ -1,0 +1,80 @@
+:root{
+    --bg:#0d0c22;
+    --text:white;
+    --bgSoft:#2d2b42;
+    --textSoft:#e5e5e5;
+    --btn:#3673fd;
+}
+*{   
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:var(--bg);
+    color:var(--text);
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.container{
+    /* background-color: #3673fd; */
+    width: 80%; /*  กำหนดความกว้าเป็น 80% ข้องหน้าจอ */
+    margin: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: 100vh;
+    /* flex: จัดการ layout แบบมิติเดียว (1D) เหมาะกับการวางเรียงเป็นแถวแนวนอน (row) หรือแนวตั้ง (column) เรียง items บน main axis โดยอัตโนมัติ
+       grid: จัดการ layout แบบสองมิติ (2D) เหมาะกับการวางเรียงเป็นตาราง (grid) ที่มีความยืดหยุ่นสูง ต้องกำหนด grid layout ผ่าน properties เพิ่มเติม เช่น grid-template-columns และ grid-template-rows  เช่น grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    */
+    display: flex; /* เปลี่ยน display เป็นแบบ  flex  */
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+@media (max-width: 1536px) {
+    .container {
+      width: 1366px;
+    }
+  }
+  
+  @media (max-width: 1366px) {
+    .container {
+      width: 1280px;
+    }
+  }
+  
+  @media (max-width: 1280px) {
+    .container {
+      width: 1024px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .container {
+      width: 768px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 640px;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .container {
+      width: 475px;
+    }
+  }
+  @media (max-width: 475px) {
+    .container {
+      width: 380px;
+    }
+  }
+  

@@ -1,0 +1,14 @@
+.container{
+    min-width: 100px;
+    padding: 10px;
+    border-radius: 15px;
+    font-weight: 400;
+    text-align: center;
+}
+.active{
+    background-color: var(--text);
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
