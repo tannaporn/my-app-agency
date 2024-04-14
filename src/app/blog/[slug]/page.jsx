@@ -1,8 +1,9 @@
+"use client"
 import Image from "next/image"
 import styles from "./singlePost.module.css"
 import { Suspense } from "react"
-import PostUser from "@/components/postUser/postUser";
-import { getPost } from "@/lib/data";
+import PostUser from "@/components/postUser/postUser"
+
 //  const tmpData =
 //    {
 //      img:"https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -12,34 +13,45 @@ import { getPost } from "@/lib/data";
 //      desc:"Black Fujifilm Dslr Camera , Black Fujifilm Dslr Camera",
 //    }
 
-//   const getData = async (prop) =>{
-//     //console.log(prop);
-//      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${prop}`);
-//      if(!res.ok) {
-//        throw new Error("Something wrong");
-//      }
-//      return res.json();
-    
-//     };
+   const getData = async (prop) =>{
+    try{
+      console.log(prop);
+      const res = await fetch(`http://localhost:4000/api/posts/${prop}`);
+      if(!res.ok) {
+        throw new Error("Something wrong"); 
+       }
+      return res.json();
+      }catch(err){
+        console.log(err);
+        return;
+      }
+
+    };
 
 
 const SinglePostPage= async ({params})=>{
+  console.log(params);
   const {slug} = params;
-    const post = await getPost(slug);
+    const postData = await getData(slug);
+    
+    const post =postData?.data;
+    console.log(post);
     return(
-        <div className={styles.container}>
+      
+      <div className={styles.container}>
         {
-        // post.img && 
+         post.img && 
         (
           <div className={styles.imgContainer}>
             <Image 
-            src= "https://images.pexels.com/photos/235970/pexels-photo-235970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src= {post.img}
             alt="" 
             fill 
             className={styles.img} />
           </div>
         )
         }
+        
         <div className={styles.textContainer}>
           <h1 className={styles.title}>
              {post.title}            

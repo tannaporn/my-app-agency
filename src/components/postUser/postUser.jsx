@@ -1,10 +1,10 @@
- import { getUser } from "@/lib/data";
+
 import styles from "./postUser.module.css";
 import Image from "next/image";
 
 // FETCH DATA WITH AN API
  const getData = async (userId) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  const res = await fetch(`http://localhost:4000/api/users/${userId}`);
 
   if (!res.ok) {   
       throw new Error("Something went wrong");
@@ -15,10 +15,10 @@ import Image from "next/image";
 
 const PostUser = async ({ userId }) => {
   // FETCH DATA WITH AN API
-  // const user = await getData(userId);
+   const user = await getData(userId);
    //console.log(user);
   // FETCH DATA WITHOUT AN API
-   const user = await getUser(userId);
+   //const user = await getUser(userId);
 
   return (
     
