@@ -1,17 +1,23 @@
- "use client"
+//  "use client"
 // "use server"
 
 import styles from "./blog.module.css"
 import PostCard from "@/components/postCard/postCard"
 
-const getData = async () =>{
-const res = await fetch("http://localhost:4000/api/posts");
-if(!res.ok) {
-  throw new Error("Something wrong");
+export const metadata = {
+  title: 'Agency Blog',
+ description: 'Next.js starter app',
 }
-return res.json();
 
-};
+const getData = async () =>{
+  const res = await fetch("http://localhost:3000/api/blog");
+ // console.log(res)
+  if(!res.ok) {
+    throw new Error("Something wrong");
+  }
+  return res.json();
+  
+  };
 
 
 const BlogPage= async () =>{

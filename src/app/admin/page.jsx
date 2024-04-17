@@ -1,6 +1,44 @@
-const LoginPage=()=>{
+import { Suspense } from "react";
+import styles from "./admin.module.css"
+import AdminPosts from "@/components/adminPosts/adminPosts";
+import AdminPostForm from "@/components/adminPostForm/adminPostForm";
+import AdminUsers from "@/components/adminUsers/adminUsers";
+import AdminUserForm from "@/components/adminUserForm/adminUserForm";
+
+export const metadata = {
+    title: 'Agency Admin',
+   description: 'Next.js starter app',
+  }
+
+const AdminPage=()=>{
     return(
-        <div>LoginPage</div>
+        <div className={styles.container}>
+            <div className={styles.row}>
+                <div className={styles.col}>
+                    
+                        <AdminPosts/>
+                  
+                </div>
+                <div className={styles.col}>
+                   
+                        <AdminPostForm/>
+                   
+                </div>
+            </div>
+
+            <div className={styles.row}>
+                <div className={styles.col}>
+                    
+                        <AdminUsers/>
+                   
+                </div>
+                <div className={styles.col}>
+                    
+                        <AdminUserForm/>
+                   
+                </div>
+            </div>
+        </div>
     )
 }
-export default LoginPage;
+export default AdminPage;

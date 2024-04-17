@@ -1,18 +1,22 @@
-"use client"
+"use client";
 
-import { usePathname } from 'next/navigation';
-import style from './navLink.module.css';
-import Link from 'next/link';
+import Link from "next/link";
+import styles from "./navLink.module.css";
+import { usePathname } from "next/navigation";
 
-const NavLink =({item}) =>{
-    const pathName = usePathname();
-    return (
-        <div className={style.container}>
-            <Link href={item.path} className={`${style.container} ${pathName=== item.path && style.active} ` }  >
-                {item.title}
-            </Link>
-            
-        </div>
-    )
-}
+const NavLink = ({ item }) => {
+  const pathName = usePathname();
+
+  return (
+    <Link
+      href={item.path}
+      className={`${styles.container} ${
+        pathName === item.path && styles.active
+      }`}
+    >
+      {item.title}
+    </Link>
+  );
+};
+
 export default NavLink;

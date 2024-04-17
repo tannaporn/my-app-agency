@@ -4,7 +4,10 @@ import styles from "./contact.module.css";
 // import dynamic from "next/dynamic"
 
 // const HydrationTestNoSSR = dynamic(()=>import("@/components/hydrationTest"), {ssr: false})
-
+ export const metadata = {
+   title: 'Agency Contact',
+  description: 'Next.js starter app',
+ }
 
 const ContactPage=()=>{
     return(

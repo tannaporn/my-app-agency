@@ -1,8 +1,9 @@
-"use client"
+
 import Image from "next/image"
 import styles from "./singlePost.module.css"
 import { Suspense } from "react"
 import PostUser from "@/components/postUser/postUser"
+import GET from "@/app/api/blog/[slug]/route"
 
 //  const tmpData =
 //    {
@@ -12,11 +13,25 @@ import PostUser from "@/components/postUser/postUser"
 //      createdAt:"2567-04-07",
 //      desc:"Black Fujifilm Dslr Camera , Black Fujifilm Dslr Camera",
 //    }
+export const metadata = {
+  title: 'Agency Blog',
+ description: 'Next.js starter app',
+}
+// const getData = async () =>{
+//   const res = await fetch("http://localhost:3000/api/blog");
+//  // console.log(res)
+//   if(!res.ok) {
+//     throw new Error("Something wrong");
+//   }
+//   return res.json();
+  
+//   };
 
-   const getData = async (prop) =>{
+   const getData = async ({prop}) =>{
+    "use server"
     try{
-      console.log(prop);
-      const res = await fetch(`http://localhost:4000/api/posts/${prop}`);
+      const {slug} = prop;
+      const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
       if(!res.ok) {
         throw new Error("Something wrong"); 
        }
@@ -30,12 +45,9 @@ import PostUser from "@/components/postUser/postUser"
 
 
 const SinglePostPage= async ({params})=>{
-  console.log(params);
-  const {slug} = params;
-    const postData = await getData(slug);
-    
+     const {slug} = params;
+    const postData = await getData(slug);  
     const post =postData?.data;
-    console.log(post);
     return(
       
       <div className={styles.container}>
