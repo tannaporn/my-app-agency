@@ -8,7 +8,7 @@ import { handleLogout } from "@/lib/action";
 
 const links = [
   {
-    title: "Homepage",
+    title: "Home",
     path: "/",
   },
   {
@@ -40,8 +40,9 @@ const Links = ({session}) => {
         ))}
         {session?.user ? (
           <>
-            {session.user?.isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+            {session.user?.isAdmin && <NavLink item={{ title: "Admin", path: "/admin" ,user:session.user}} />}
             <form action={handleLogout}>
+              {/* <input type="hidden" value={session.user?.id} name="userId" id="UserId"/> */}
               <button className={styles.logout}>Logout</button>
             </form>
           </>

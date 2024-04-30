@@ -1,26 +1,26 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { Post, User } from "./models";
+import { Contact, Post, User } from "./models";
 import { connectToDb } from "./utils";
-import { signIn, signOut } from "./auth";
+import { signIn, signOut,auth } from "./auth";
 import bcrypt from "bcryptjs";
 import { redirect } from 'next/navigation'
 
+
+
 export const addPost = async (prevState,formData) => {
-  // const title = formData.get("title");
-  // const desc = formData.get("desc");
-  // const slug = formData.get("slug");
 
-  const { title, desc, slug, userId } = Object.fromEntries(formData);
-
+  const { title, desc, slug, userId,img } = Object.fromEntries(formData);
   try {
+
      await connectToDb();
     const newPost = new Post({
       title,
       desc,
       slug,
       userId,
+      img
     });
 
     await newPost.save();
@@ -73,6 +73,7 @@ export const addUser = async (prevState,formData) => {
   }
 };
 
+
 export const deleteUser = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
@@ -88,6 +89,49 @@ export const deleteUser = async (formData) => {
     return { error: "Something went wrong!" };
   }
 };
+export const AddContact = async (formData) => {
+  try {
+    console.log("AddContact");
+    console.log(formData);
+    const { name, email, phoneNo, message } = formData;
+    
+    // Connect to the database
+    await connectToDb();
+
+    // Create a new instance of Contact model with the form data
+    const newContact = new Contact({
+      name,
+      email,
+      phoneNo,
+      message
+    });
+
+    // Save the new contact to the database
+    await newContact.save();
+    console.log("saved to db");
+    
+    // Return success if contact is saved successfully
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    // Return error message if an error occurs
+    return { error: "Something went wrong!" };
+  }
+};
+
+export const deleteContact = async (formData) =>{
+
+  const {id} = Object.fromEntries(formData);
+  try {
+    await connectToDb();
+    await Contact.findByIdAndDelete(id);
+    console.log("deleted contact from db");
+    revalidatePath("/admin");
+  } catch (error) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+}
 
 export const handleGithubLogin = async () => {
   "use server";
@@ -141,25 +185,19 @@ export const register = async (previousState, formData) => {
 
 export const login = async (prevState, formData) => {
   const { username, password } = Object.fromEntries(formData);
-console.log(Object.fromEntries(formData));
   try {
     await signIn("credentials", { username, password });
  
     return { success: true };
  
   } catch (err) {
-    // console.log("login credentials error"+err);
-    //  console.log("login credentials Error NEXT_REDIRECT"+err.message);
 
     if (err.message.includes("CredentialsSignin")) {
       return { error: "Invalid username or password" };
     }else  if (err.message.includes("NEXT_REDIRECT"))
     {
-      //return {error:"Failed to NEXT_REDIRECT!"}
       return { success: true };
     } 
-    //else  return { success: true };
-    // throw new Error("Failed to login!");
     return {error:"Failed to login!"}
   }
 };

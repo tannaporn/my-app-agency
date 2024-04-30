@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const LoginForm = () => {
   const [state, formAction] = useFormState(login, undefined);
   const router = useRouter();
-  console.log("login state >>" +state)
+ 
   if(state?.success ){
     debugger
     router.push("/");

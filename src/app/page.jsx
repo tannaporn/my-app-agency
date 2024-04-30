@@ -1,6 +1,8 @@
 import Image from "next/image";
 import styles from "./home.module.css";
+
 const Home = () => {
+
   return( 
     <div className={styles.container}>
     <div className={styles.textContainer}>
@@ -11,7 +13,7 @@ const Home = () => {
       </p>
       <div className={styles.buttons}>
         <button className={styles.button}>Learn More</button>
-        <button className={styles.button}>Contact</button>
+        <a href="/contact" className={styles.a}>Contact</a>
       </div>
       <div className={styles.brands}>
         <Image src="/brands.png" alt="" fill className={styles.brandImg}/>

@@ -51,6 +51,18 @@
   /* flex: 1;
   position: relative; */
 }
+
+.a{
+  background-color: antiquewhite;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  padding: 20px;
+  min-width: 120px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
 @media (max-width: 1024px) {
   .container {
     flex-direction: column;

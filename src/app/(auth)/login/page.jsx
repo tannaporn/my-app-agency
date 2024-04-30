@@ -1,9 +1,9 @@
 import LoginForm from "@/components/loginForm/loginForm";
 import { handleGithubLogin } from "@/lib/action";
 import styles from "./login.module.css";
-import { auth } from "@/lib/auth";
 
-const LoginPage = () => {
+
+const LoginPage =  () => {
 
   // auth?.user && router.push("/");
 

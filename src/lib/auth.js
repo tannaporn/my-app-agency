@@ -7,11 +7,12 @@ import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";  //โหลดการตั้งค่าการกำหนดค่าจากไฟล์ auth.config.js แยกต่างหาก อาจมีตัวเลือกสำหรับโทเค็น JWT การจัดการเซสชัน และพารามิเตอร์ที่เกี่ยวข้องกับการรับรองความถูกต้องอื่นๆ
 import dotenv from 'dotenv'
 
+
 const login = async (credentials) => {
   try {
      await  connectToDb();
     const user = await User.findOne({ username: credentials.username });
-
+   
     if (!user) throw new Error("Wrong credentials!");
 
        const isPasswordCorrect = await bcrypt.compare(
@@ -49,6 +50,7 @@ export const {
       async authorize(credentials) {
         try {
           const user = await login(credentials);
+          //setCookie(null,'user',user)
           return user;
         } catch (err) {
           return null;
@@ -64,7 +66,7 @@ export const {
         try {
             await  connectToDb();
            const user = await User.findOne({ email: profile?.email });
-
+        
           if (!user) {
             const newUser = new User({
               username: profile.login,
@@ -79,6 +81,7 @@ export const {
           return false;
         }
       }
+      
       return true;
     },
     ...authConfig.callbacks,

@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export const authConfig = {
     pages: {
       signIn: "/login",
@@ -6,8 +8,8 @@ export const authConfig = {
     callbacks: {
       // FOR MORE DETAIL ABOUT CALLBACK FUNCTIONS CHECK https://next-auth.js.org/configuration/callbacks
        // If a user object is provided, it means this is a sign-in event
-      async jwt({ token, user }) {
-       // console.log("jwt"+token,user)
+      async jwt({ token, user  }) {
+        //console.log("jwt"+token,user)
         if (user) {
           token.id = user.id;
           token.isAdmin = user.isAdmin;
@@ -23,6 +25,9 @@ export const authConfig = {
           id: token.id,
           isAdmin: token.isAdmin,
         };
+
+
+
         return session;
       },
       authorized({ auth, request }) {
@@ -45,14 +50,13 @@ export const authConfig = {
           return false;
         }
   
-        // ONLY UNAUTHENTICATED USERS CAN REACH THE LOGIN PAGE
-        // console.log("isOnLoginPage" + isOnLoginPage,user)
-        // console.log("nextUrl" + new URL("/", request.nextUrl))
+        // // ONLY UNAUTHENTICATED USERS CAN REACH THE LOGIN PAGE
+        // // console.log("isOnLoginPage" + isOnLoginPage,user)
+        // // console.log("nextUrl" + new URL("/", request.nextUrl))
 
         if (isOnLoginPage && user) {
-          
           return Response.redirect(new URL("/", request.nextUrl));
-        }
+         }
         
   
         return true

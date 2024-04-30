@@ -5,7 +5,7 @@ import styles from "./adminUsers.module.css"
 import { deleteUser } from "@/lib/action";
 
 const getData = async () =>{
-    const res = await fetch("http://localhost:4000/api/users");
+    const res = await fetch("http://localhost:3000/api/users");
    //console.log(res)
     if(!res.ok) {
       throw new Error("Something wrong");
@@ -16,8 +16,7 @@ const getData = async () =>{
 
 const AdminUsers= async ()=>{
     const res =  await getData();
-    // console.log(res)
-
+     //console.log(res)
     const users = res? res.data :null;
   
     return (
@@ -27,7 +26,7 @@ const AdminUsers= async ()=>{
         {users.map((user)=> 
         (
             
-            <div className={styles.User} key={user._id}>
+            <div className={styles.user} key={user._id}>
                 <div className={styles.detail}>
                    
              <Image 
@@ -42,7 +41,7 @@ const AdminUsers= async ()=>{
                 </div>
                 <form className="" action={deleteUser}> 
                     <input type="hidden" name="id" value={user._id}/>
-                    <button className={styles.UserButton}>Delete</button>
+                    <button className={styles.userButton}>Delete</button>
                 </form>
 
             </div>
